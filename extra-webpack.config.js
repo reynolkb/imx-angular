@@ -6,7 +6,7 @@ module.exports = {
       stream: require.resolve("stream-browserify"),
       crypto: require.resolve("crypto-browserify"),
       http: require.resolve("stream-http"),
-      url: require.resolve("url/"),
+      url: require.resolve("url"),
     },
   },
 };
