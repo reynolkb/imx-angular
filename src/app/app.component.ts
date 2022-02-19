@@ -14,50 +14,34 @@ import {
 export class AppComponent {
   title = 'angular-imx';
 
-  link = new Link(process.env['REACT_APP_ROPSTEN_LINK_URL']);
+  //   link = new Link(process.env['REACT_APP_ROPSTEN_LINK_URL']);
+  link = new Link('https://link.ropsten.x.immutable.com');
+
   client: any;
   walletConnected: any;
   walletAddress: any;
   balance: any;
 
   async linkSetup(): Promise<void> {
-    const publicApiUrl: string = process.env['REACT_APP_ROPSTEN_ENV_URL'] ?? '';
+    // const publicApiUrl: string = process.env['REACT_APP_ROPSTEN_ENV_URL'] ?? '';
+    const publicApiUrl = 'https://api.ropsten.x.immutable.com/v1';
     this.client = await ImmutableXClient.build({ publicApiUrl });
 
     const res = await this.link.setup({});
     this.walletConnected = true;
     this.walletAddress = res.address;
 
-    console.log(
-      ` ----------------------- res is ${JSON.stringify(
-        res
-      )} ----------------------- `
-    );
+    console.log(`res is ${JSON.stringify(res)}`);
 
-    console.log(
-      ` ----------------------- walletConnected is ${this.walletConnected} ----------------------- `
-    );
-    console.log(
-      ` ----------------------- walletAddress ${this.walletAddress} ----------------------- `
-    );
+    console.log(`walletConnected is ${this.walletConnected}`);
+    console.log(`walletAddress ${this.walletAddress}`);
 
-    // this.balance = await this.client.getBalance({
-    //   user: res.address,
-    //   tokenAddress: 'eth',
-    // });
+    this.balance = await this.client.getBalance({
+      user: res.address,
+      tokenAddress: 'eth',
+    });
 
-    // console.log(
-    //   ` ----------------------- balance is ${this.balance} ----------------------- `
-    // );
-
-    this.client
-      .getBalance({
-        user: res.address,
-        tokenAddress: 'eth',
-      })
-      .then((res: any) => {
-        console.log(res);
-      });
+    console.log(`balance is ${JSON.stringify(this.balance)}`);
 
     localStorage.setItem('address', res.address);
   }
