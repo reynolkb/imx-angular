@@ -1,3 +1,5 @@
+const Dotenv = require("dotenv-webpack");
+
 module.exports = {
   resolve: {
     fallback: {
@@ -9,4 +11,5 @@ module.exports = {
       url: require.resolve("url"),
     },
   },
+  plugins: [new Dotenv()],
 };

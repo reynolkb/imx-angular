@@ -14,8 +14,8 @@ import {
 export class AppComponent {
   title = 'angular-imx';
 
-  //   link = new Link(process.env['REACT_APP_ROPSTEN_LINK_URL']);
-  link = new Link('https://link.ropsten.x.immutable.com');
+  link = new Link(process.env['REACT_APP_ROPSTEN_LINK_URL']);
+  //   link = new Link('https://link.ropsten.x.immutable.com');
 
   client: any;
   walletConnected: any;
@@ -23,8 +23,8 @@ export class AppComponent {
   balance: any;
 
   async linkSetup(): Promise<void> {
-    // const publicApiUrl: string = process.env['REACT_APP_ROPSTEN_ENV_URL'] ?? '';
-    const publicApiUrl = 'https://api.ropsten.x.immutable.com/v1';
+    const publicApiUrl: string = process.env['REACT_APP_ROPSTEN_ENV_URL'] ?? '';
+    // const publicApiUrl = 'https://api.ropsten.x.immutable.com/v1';
     this.client = await ImmutableXClient.build({ publicApiUrl });
 
     const res = await this.link.setup({});
